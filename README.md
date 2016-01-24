@@ -18,7 +18,9 @@ Wrapper around **iTMSTransporter** command line util from XCode (for default usi
 * sort screenshots to platforms according to image size
 * sort screenshots inside platform by name of images
 * drag&drop screenshots to reorder
+
 ****
+
 ###How to use
 * clone/download source, open in XCode, start
 * drag screenshots to application's window (supporting folders, nested folder)
