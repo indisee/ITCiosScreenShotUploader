@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A90559E61C4F574F002E9CB1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559DE1C4F574F002E9CB1 /* Extensions.swift */; };
+		A90559E71C4F574F002E9CB1 /* ItunesConnectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559DF1C4F574F002E9CB1 /* ItunesConnectHandler.swift */; };
+		A90559E81C4F574F002E9CB1 /* ScreenShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559E11C4F574F002E9CB1 /* ScreenShot.swift */; };
+		A90559E91C4F574F002E9CB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559E31C4F574F002E9CB1 /* ViewController.swift */; };
+		A90559EA1C4F574F002E9CB1 /* DranNDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559E51C4F574F002E9CB1 /* DranNDropView.swift */; };
+		A90559EC1C4F671E002E9CB1 /* ScreenshotsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559EB1C4F671E002E9CB1 /* ScreenshotsHandler.swift */; };
+		A90559EE1C4F739B002E9CB1 /* ScreenShotsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559ED1C4F739B002E9CB1 /* ScreenShotsListViewController.swift */; };
+		A90559F01C4F75DB002E9CB1 /* Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559EF1C4F75DB002E9CB1 /* Segues.swift */; };
+		A90559F21C4F7770002E9CB1 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559F11C4F7770002E9CB1 /* Protocols.swift */; };
+		A9055A171C50A66A002E9CB1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9055A161C50A66A002E9CB1 /* SettingsViewController.swift */; };
+		A96AA6621C532A10008DECAF /* AEXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA6611C532A10008DECAF /* AEXML.swift */; };
+		A96AA6701C5336DC008DECAF /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA66F1C5336DC008DECAF /* KeychainSwiftDistrib.swift */; };
+		A96AA6721C5374F8008DECAF /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA6711C5374F8008DECAF /* BlockView.swift */; };
+		A96AA6741C546EE5008DECAF /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA6731C546EE5008DECAF /* Common.swift */; };
+		A96AA6761C5470F7008DECAF /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA6751C5470F7008DECAF /* HelperFunctions.swift */; };
+		A96AA67C1C547128008DECAF /* ScreeenShotsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA6781C547128008DECAF /* ScreeenShotsHeader.swift */; };
+		A96AA67D1C547128008DECAF /* ScreeenShotsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96AA6791C547128008DECAF /* ScreeenShotsHeader.xib */; };
+		A96AA67E1C547128008DECAF /* ScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA67A1C547128008DECAF /* ScreenShotCell.swift */; };
+		A96AA67F1C547128008DECAF /* ScreenShotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96AA67B1C547128008DECAF /* ScreenShotCell.xib */; };
+		A96AA6811C547136008DECAF /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA6801C547136008DECAF /* GridLayout.swift */; };
+		A9CEFB211C4E433400897968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CEFB201C4E433400897968 /* AppDelegate.swift */; };
+		A9CEFB251C4E433400897968 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9CEFB241C4E433400897968 /* Assets.xcassets */; };
+		A9CEFB281C4E433400897968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CEFB261C4E433400897968 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A90559D61C4F541B002E9CB1 /* ItunesScreenshotUploader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ItunesScreenshotUploader-Bridging-Header.h"; sourceTree = "<group>"; };
+		A90559DE1C4F574F002E9CB1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Managers/Extensions.swift; sourceTree = "<group>"; };
+		A90559DF1C4F574F002E9CB1 /* ItunesConnectHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesConnectHandler.swift; sourceTree = "<group>"; };
+		A90559E11C4F574F002E9CB1 /* ScreenShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShot.swift; sourceTree = "<group>"; };
+		A90559E31C4F574F002E9CB1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A90559E51C4F574F002E9CB1 /* DranNDropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DranNDropView.swift; sourceTree = "<group>"; };
+		A90559EB1C4F671E002E9CB1 /* ScreenshotsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsHandler.swift; sourceTree = "<group>"; };
+		A90559ED1C4F739B002E9CB1 /* ScreenShotsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShotsListViewController.swift; sourceTree = "<group>"; };
+		A90559EF1C4F75DB002E9CB1 /* Segues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segues.swift; sourceTree = "<group>"; };
+		A90559F11C4F7770002E9CB1 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = Managers/Protocols.swift; sourceTree = "<group>"; };
+		A9055A161C50A66A002E9CB1 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A96AA6611C532A10008DECAF /* AEXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEXML.swift; sourceTree = "<group>"; };
+		A96AA66F1C5336DC008DECAF /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
+		A96AA6711C5374F8008DECAF /* BlockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
+		A96AA6731C546EE5008DECAF /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		A96AA6751C5470F7008DECAF /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		A96AA6781C547128008DECAF /* ScreeenShotsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreeenShotsHeader.swift; sourceTree = "<group>"; };
+		A96AA6791C547128008DECAF /* ScreeenShotsHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreeenShotsHeader.xib; sourceTree = "<group>"; };
+		A96AA67A1C547128008DECAF /* ScreenShotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShotCell.swift; sourceTree = "<group>"; };
+		A96AA67B1C547128008DECAF /* ScreenShotCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreenShotCell.xib; sourceTree = "<group>"; };
+		A96AA6801C547136008DECAF /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		A9CEFB1D1C4E433400897968 /* ItunesScreenshotUploader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItunesScreenshotUploader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9CEFB201C4E433400897968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A9CEFB241C4E433400897968 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9CEFB271C4E433400897968 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A9CEFB291C4E433400897968 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A9CEFB1A1C4E433400897968 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A90559DC1C4F574F002E9CB1 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				A90559DE1C4F574F002E9CB1 /* Extensions.swift */,
+				A90559F11C4F7770002E9CB1 /* Protocols.swift */,
+				A96AA6731C546EE5008DECAF /* Common.swift */,
+				A96AA6751C5470F7008DECAF /* HelperFunctions.swift */,
+				A90559DD1C4F574F002E9CB1 /* Managers */,
+				A90559E01C4F574F002E9CB1 /* Model */,
+				A90559E21C4F574F002E9CB1 /* Screens */,
+				A90559E41C4F574F002E9CB1 /* Views */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		A90559DD1C4F574F002E9CB1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A90559EF1C4F75DB002E9CB1 /* Segues.swift */,
+				A90559DF1C4F574F002E9CB1 /* ItunesConnectHandler.swift */,
+				A90559EB1C4F671E002E9CB1 /* ScreenshotsHandler.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A90559E01C4F574F002E9CB1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A90559E11C4F574F002E9CB1 /* ScreenShot.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A90559E21C4F574F002E9CB1 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A90559E31C4F574F002E9CB1 /* ViewController.swift */,
+				A90559ED1C4F739B002E9CB1 /* ScreenShotsListViewController.swift */,
+				A9055A161C50A66A002E9CB1 /* SettingsViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		A90559E41C4F574F002E9CB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A96AA6771C547128008DECAF /* CollectionViewStuff */,
+				A90559E51C4F574F002E9CB1 /* DranNDropView.swift */,
+				A96AA6711C5374F8008DECAF /* BlockView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A96AA6601C532A10008DECAF /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				A96AA66F1C5336DC008DECAF /* KeychainSwiftDistrib.swift */,
+				A96AA6611C532A10008DECAF /* AEXML.swift */,
+			);
+			name = 3rdParty;
+			path = Code/3rdParty;
+			sourceTree = "<group>";
+		};
+		A96AA6771C547128008DECAF /* CollectionViewStuff */ = {
+			isa = PBXGroup;
+			children = (
+				A96AA6801C547136008DECAF /* GridLayout.swift */,
+				A96AA6781C547128008DECAF /* ScreeenShotsHeader.swift */,
+				A96AA6791C547128008DECAF /* ScreeenShotsHeader.xib */,
+				A96AA67A1C547128008DECAF /* ScreenShotCell.swift */,
+				A96AA67B1C547128008DECAF /* ScreenShotCell.xib */,
+			);
+			path = CollectionViewStuff;
+			sourceTree = "<group>";
+		};
+		A9CEFB141C4E433400897968 = {
+			isa = PBXGroup;
+			children = (
+				A9CEFB1F1C4E433400897968 /* ItunesScreenshotUploader */,
+				A9CEFB1E1C4E433400897968 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A9CEFB1E1C4E433400897968 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9CEFB1D1C4E433400897968 /* ItunesScreenshotUploader.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9CEFB1F1C4E433400897968 /* ItunesScreenshotUploader */ = {
+			isa = PBXGroup;
+			children = (
+				A9CEFB201C4E433400897968 /* AppDelegate.swift */,
+				A9CEFB261C4E433400897968 /* Main.storyboard */,
+				A9CEFB291C4E433400897968 /* Info.plist */,
+				A90559D61C4F541B002E9CB1 /* ItunesScreenshotUploader-Bridging-Header.h */,
+				A90559DC1C4F574F002E9CB1 /* Code */,
+				A96AA6601C532A10008DECAF /* 3rdParty */,
+				A9CEFB241C4E433400897968 /* Assets.xcassets */,
+			);
+			path = ItunesScreenshotUploader;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A9CEFB1C1C4E433400897968 /* ItunesScreenshotUploader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9CEFB2C1C4E433400897968 /* Build configuration list for PBXNativeTarget "ItunesScreenshotUploader" */;
+			buildPhases = (
+				A9CEFB191C4E433400897968 /* Sources */,
+				A9CEFB1A1C4E433400897968 /* Frameworks */,
+				A9CEFB1B1C4E433400897968 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ItunesScreenshotUploader;
+			productName = ItunesScreenshotUploader;
+			productReference = A9CEFB1D1C4E433400897968 /* ItunesScreenshotUploader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9CEFB151C4E433400897968 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = 2tickets2dublin;
+				TargetAttributes = {
+					A9CEFB1C1C4E433400897968 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = A9CEFB181C4E433400897968 /* Build configuration list for PBXProject "ItunesScreenshotUploader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A9CEFB141C4E433400897968;
+			productRefGroup = A9CEFB1E1C4E433400897968 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A9CEFB1C1C4E433400897968 /* ItunesScreenshotUploader */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9CEFB1B1C4E433400897968 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A96AA67D1C547128008DECAF /* ScreeenShotsHeader.xib in Resources */,
+				A9CEFB251C4E433400897968 /* Assets.xcassets in Resources */,
+				A9CEFB281C4E433400897968 /* Main.storyboard in Resources */,
+				A96AA67F1C547128008DECAF /* ScreenShotCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A9CEFB191C4E433400897968 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A96AA6721C5374F8008DECAF /* BlockView.swift in Sources */,
+				A90559E91C4F574F002E9CB1 /* ViewController.swift in Sources */,
+				A96AA6741C546EE5008DECAF /* Common.swift in Sources */,
+				A96AA6761C5470F7008DECAF /* HelperFunctions.swift in Sources */,
+				A90559E81C4F574F002E9CB1 /* ScreenShot.swift in Sources */,
+				A90559EE1C4F739B002E9CB1 /* ScreenShotsListViewController.swift in Sources */,
+				A9CEFB211C4E433400897968 /* AppDelegate.swift in Sources */,
+				A96AA67C1C547128008DECAF /* ScreeenShotsHeader.swift in Sources */,
+				A90559EC1C4F671E002E9CB1 /* ScreenshotsHandler.swift in Sources */,
+				A90559F21C4F7770002E9CB1 /* Protocols.swift in Sources */,
+				A90559E71C4F574F002E9CB1 /* ItunesConnectHandler.swift in Sources */,
+				A96AA6621C532A10008DECAF /* AEXML.swift in Sources */,
+				A90559EA1C4F574F002E9CB1 /* DranNDropView.swift in Sources */,
+				A96AA67E1C547128008DECAF /* ScreenShotCell.swift in Sources */,
+				A96AA6811C547136008DECAF /* GridLayout.swift in Sources */,
+				A90559F01C4F75DB002E9CB1 /* Segues.swift in Sources */,
+				A90559E61C4F574F002E9CB1 /* Extensions.swift in Sources */,
+				A9055A171C50A66A002E9CB1 /* SettingsViewController.swift in Sources */,
+				A96AA6701C5336DC008DECAF /* KeychainSwiftDistrib.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A9CEFB261C4E433400897968 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9CEFB271C4E433400897968 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A9CEFB2A1C4E433400897968 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A9CEFB2B1C4E433400897968 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A9CEFB2D1C4E433400897968 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ItunesScreenshotUploader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.2tickets2dublin.ItunesScreenshotUploader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ItunesScreenshotUploader/ItunesScreenshotUploader-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A9CEFB2E1C4E433400897968 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ItunesScreenshotUploader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.2tickets2dublin.ItunesScreenshotUploader;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ItunesScreenshotUploader/ItunesScreenshotUploader-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9CEFB181C4E433400897968 /* Build configuration list for PBXProject "ItunesScreenshotUploader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9CEFB2A1C4E433400897968 /* Debug */,
+				A9CEFB2B1C4E433400897968 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9CEFB2C1C4E433400897968 /* Build configuration list for PBXNativeTarget "ItunesScreenshotUploader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9CEFB2D1C4E433400897968 /* Debug */,
+				A9CEFB2E1C4E433400897968 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A9CEFB151C4E433400897968 /* Project object */;
+}
