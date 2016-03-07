@@ -15,10 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         initDefaults()
     }
     
-    func applicationWillTerminate(aNotification: NSNotification) {
-    }
-    
-    
     func initDefaults() {
         NSUserDefaults.standardUserDefaults().registerDefaults([iTMSTransporterPathKey :DefaultiTMSTransporterPath])
     }

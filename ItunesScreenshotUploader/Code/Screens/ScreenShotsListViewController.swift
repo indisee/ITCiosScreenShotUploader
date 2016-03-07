@@ -136,11 +136,11 @@ class ScreenShotsListViewController: NSViewController {
         selectLang.hidden = (uploadType == .SameScreenShotUploadingMode)
     }
     
-    private func changeSegment(sender:NSSegmentedControl) {
+    func changeSegment(sender:NSSegmentedControl) {
         uploadType = ScreenShotUploadingMode(rawValue: segment.selectedSegment)!
     }
     
-    private func back(sender:AnyObject) {
+    func back(sender:AnyObject) {
         segue.pop()
     }
     
@@ -201,7 +201,7 @@ class ScreenShotsListViewController: NSViewController {
         
         self.fillStatusLbl("Getting Meta...", color: blueColor)
         
-        let r = itcHandler.getMetaWithCallback { (status) -> Void in
+        let r = itcHandler.getMetaWithCallback { [unowned self] (status) -> Void in
             print("getMeta \(status)")
             
             if status == .SuccessStatus {

@@ -77,7 +77,7 @@ class DranNDropView: NSView {
 
                 let op = NSBlockOperation()
                 
-                op.addExecutionBlock { () -> Void in
+                op.addExecutionBlock { [unowned self, op] () -> Void in
                     
                     let pBoard = sender.draggingPasteboard()
                     if let pathes = pBoard.propertyListForType("NSFilenamesPboardType") as? [String] {

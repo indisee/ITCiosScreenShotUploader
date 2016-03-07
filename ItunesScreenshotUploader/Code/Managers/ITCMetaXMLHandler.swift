@@ -175,7 +175,7 @@ class ITCMetaXMLHandler {
         
         let op = NSBlockOperation()
         
-        op.addExecutionBlock { () -> Void in
+        op.addExecutionBlock { [unowned self, op] () -> Void in
             
             let fail = {()->Void in
                 if !op.cancelled {
