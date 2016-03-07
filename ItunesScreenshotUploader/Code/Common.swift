@@ -8,6 +8,17 @@
 
 import Foundation
 
+//constants
 let NoLangID = "No lang"
+let DefaultiTMSTransporterPath = "/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms/bin/iTMSTransporter"
 
 
+//tasks names
+let DropScreenShotsTask = "DropScreenShotsTasks"
+
+
+//storage
+let iTMSTransporterPathKey  = "ITCPath"
+let UserNameKey             = "ITMSUSER"
+let SKUKey                  = "ITMSSKU"
+let PasswordKey             = "ITMSPASS"

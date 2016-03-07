@@ -11,6 +11,16 @@ import Cocoa
 class ScreenShotCell: NSCollectionViewItem {
     
     static let ID = "ScreenShotCellID"
+    
+    //MARK: -  -
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    
+    //MARK: - States -
+    
     override var highlightState: NSCollectionViewItemHighlightState {
         didSet {
             if highlightState == .ForSelection {
@@ -31,22 +41,20 @@ class ScreenShotCell: NSCollectionViewItem {
         }
     }
     
-    override func viewDidLoad() {
-            super.viewDidLoad()
-    }
+    //MARK: - Open image actinos -
     
     override func mouseDown(theEvent: NSEvent) {
         if theEvent.clickCount == 2 {
-                openImage()
-            } else {
-                super.mouseDown(theEvent)
+            openImage()
+        } else {
+            super.mouseDown(theEvent)
         }
     }
     
     func openImage() {
-                    if let image = representedObject as? ScreenShot {
+        if let image = representedObject as? ScreenShot {
             NSWorkspace.sharedWorkspace().openFile(image.path)
-                    }
+        }
     }
     
 }

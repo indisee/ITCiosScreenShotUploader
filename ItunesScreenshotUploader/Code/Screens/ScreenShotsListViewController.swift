@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSource, NSComboBoxDelegate, NSCollectionViewDelegate {
+class ScreenShotsListViewController: NSViewController {
+    
     
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var selectLang: NSComboBox!
@@ -32,15 +33,15 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
     }
     
     var draggingIndexPath:NSIndexPath?
-    
     var segue: ReplaceSegue!
-
+    
+    //model
     var screenShotsList:[ScreenShot]!
     var model: [String:[[ScreenShot]]] = [String:[[ScreenShot]]]()
     var modelToShow: [[ScreenShot]] = [[ScreenShot]]()
     var allLanguages:[String] = [String]()
     var lang:String = NoLangID
-
+    
     //handlers
     let itcHandler = ItunesConnectHandler.sharedInstance
     let screenshotsHandler = ScreenshotsHandler()
@@ -66,36 +67,40 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
         
     }
     
+    //MARK: - UI setup -
     
-    func fillStatusLbl(text:String, color:NSColor) {
-        statusLbl.stringValue = text
-        statusLbl.textColor = color
+    private func setupUI() {
+        setupStabView()
+        setupSpinners()
+        setupSegmentControll()
     }
     
-    
-    //MARK: - UI -
-    
-    func setupUI() {
+    private func setupStabView() {
         let l = CALayer()
         l.backgroundColor = NSColor.darkGrayColor().CGColor
         l.opacity = 0.5
+        
         stabView.wantsLayer = true
         stabView.layer = l
         stabView.hidden = true
-        
+    }
+    
+    private func setupSpinners() {
         stabSpinner2.hidden = true
         
         stabSpinner.startAnimation(nil)
         stabSpinner2.startAnimation(nil)
-
+        
         stabSpinner.controlTint = NSControlTint.GraphiteControlTint
         stabSpinner2.controlTint = NSControlTint.GraphiteControlTint
-
+    }
+    
+    private func setupSegmentControll() {
         segment.target = self
         segment.action = Selector("changeSegment:")
     }
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         collectionView.registerClass(ScreenShotCell.self, forItemWithIdentifier: ScreenShotCell.ID)
         collectionView.registerNib(NSNib(nibNamed: "ScreeenShotsHeader", bundle: NSBundle.mainBundle()), forSupplementaryViewOfKind: NSCollectionElementKindSectionHeader, withIdentifier: ScreeenShotsHeader.ID)
         collectionView.dataSource = self
@@ -105,35 +110,46 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
         collectionView.setDraggingSourceOperationMask(NSDragOperation.Every, forLocal: true)
     }
     
-    func  showLoading() {
+    
+    //MARK: - UI actions -
+    
+    private func  showLoading() {
         stabView.hidden = false
         stabSpinner2.hidden = false
     }
     
-    func hideLoading() {
+    private func hideLoading() {
         stabView.hidden = true
         stabSpinner2.hidden = true
     }
     
+    private func fillStatusLbl(text:String, color:NSColor) {
+        statusLbl.stringValue = text
+        statusLbl.textColor = color
+    }
     
-    //MARK: - Actions -
     
-    func updateUIState() {
+    //MARK: - Actions helper-
+    
+    private func updateUIState() {
         generateModelForCollectionView()
         selectLang.hidden = (uploadType == .SameScreenShotUploadingMode)
     }
     
-    func changeSegment(sender:NSSegmentedControl) {
+    private func changeSegment(sender:NSSegmentedControl) {
         uploadType = ScreenShotUploadingMode(rawValue: segment.selectedSegment)!
     }
     
-    func back(sender:AnyObject) {
+    private func back(sender:AnyObject) {
         segue.pop()
     }
     
-    func showSettings() {
+    private func showSettings() {
         self.performSegueWithIdentifier("ShowSettingsSegueId", sender: nil)
     }
+    
+    
+    //MARK: - Actions ITC -
     
     @IBAction func validate(sender: AnyObject) {
         showLoading()
@@ -189,6 +205,7 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
             print("getMeta \(status)")
             
             if status == .SuccessStatus {
+                self.screenshotsHandler.copyScreenShotsImagesToITMSP(Array(self.model.values))
                 self.xmlMetaHandler.updateMetadataForScreenShots(self.model, uploadType:self.uploadType, callback: { (status) -> Void in
                     self.fillStatusLbl("Meta downloaded", color: self.greenColor)
                     self.hideLoading()
@@ -204,9 +221,13 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
             showSettings()
         }
     }
-    
-    
-    // MARK: NSCollectionViewDataSource
+}
+
+
+//MARK: - NSCollectionViewDataSource -
+
+
+extension ScreenShotsListViewController : NSCollectionViewDataSource {
     
     func reloadData() {
         if let m = model[lang] {
@@ -267,8 +288,12 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
         }
         return NSView()
     }
+}
 
-    //MARK: - NSCollectionViewDelegate -
+
+//MARK: - NSCollectionViewDelegate -
+
+extension ScreenShotsListViewController : NSCollectionViewDelegate {
     
     func collectionView(collectionView: NSCollectionView, canDragItemsAtIndexPaths indexPaths: Set<NSIndexPath>, withEvent event: NSEvent) -> Bool {
         draggingIndexPath = indexPaths.first
@@ -286,7 +311,7 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
     }
     
     func collectionView(collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: NSIndexPath, dropOperation: NSCollectionViewDropOperation) -> Bool {
-
+        
         let temp = modelToShow[draggingIndexPath!.section][draggingIndexPath!.item]
         
         var section = modelToShow[draggingIndexPath!.section]
@@ -300,8 +325,12 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
         
         return true
     }
-    
-    //MARK: - NSComboBoxDelegate -
+}
+
+
+//MARK: - NSComboBoxDelegate -
+
+extension ScreenShotsListViewController : NSComboBoxDelegate {
     
     func comboBoxSelectionDidChange(notification: NSNotification) {
         if selectLang.objectValues.count > 0{
@@ -309,4 +338,5 @@ class ScreenShotsListViewController: NSViewController, NSCollectionViewDataSourc
             reloadData()
         }
     }
+    
 }

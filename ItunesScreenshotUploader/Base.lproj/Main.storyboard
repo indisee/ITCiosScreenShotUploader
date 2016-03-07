@@ -89,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="69" y="268"/>
         </scene>
-        <!--View Controller-->
+        <!--Initail View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerID" id="XfG-lQ-9wD" customClass="ViewController" customModule="ItunesScreenshotUploader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerID" id="XfG-lQ-9wD" customClass="InitailViewController" customModule="ItunesScreenshotUploader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>

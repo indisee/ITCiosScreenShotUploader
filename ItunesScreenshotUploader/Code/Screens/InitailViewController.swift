@@ -13,7 +13,7 @@ enum ScreenShotUploadingMode : Int {
     case DiffScreenShotUploadingMode
 }
 
-class ViewController: NSViewController, FiniteTask {
+class InitailViewController: NSViewController {
     
     @IBOutlet weak var dragNDropView: DranNDropView!
     @IBOutlet weak var screenInfoLbl: NSTextField!
@@ -23,14 +23,32 @@ class ViewController: NSViewController, FiniteTask {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
+    }
+    
+    private func setupUI() {
         spinner.hidden = true
         dragNDropView.delegate = self
     }
     
+    
+    //MARK: - Go next -
+    
     func goToScreenshotsList() {
         self.performSegueWithIdentifier("ScreenShotsListViewControllerSegueID", sender: self)
     }
+    
+    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+        let destination:ScreenShotsListViewController = segue.destinationController as! ScreenShotsListViewController
+        destination.screenShotsList = dragNDropView.screenShotsList
+        destination.segue = segue as? ReplaceSegue
+    }
+}
+
+
+//MARK: - FiniteTask -
+
+extension InitailViewController : FiniteTask {
     
     func didEndTask(taskKey:String) {
         if taskKey == DropScreenShotsTask {
@@ -50,9 +68,4 @@ class ViewController: NSViewController, FiniteTask {
         }
     }
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
-        let destination:ScreenShotsListViewController = segue.destinationController as! ScreenShotsListViewController
-        destination.screenShotsList = dragNDropView.screenShotsList
-        destination.segue = segue as? ReplaceSegue
-    }
 }

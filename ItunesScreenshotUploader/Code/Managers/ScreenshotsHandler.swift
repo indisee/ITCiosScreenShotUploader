@@ -13,29 +13,33 @@ class ScreenshotsHandler {
     
     private let fileManager = NSFileManager.defaultManager()
     
-    //Lang -> Platform -> Screenshot
-    func convertRawScreenShotsToDataSet(rawScreenShots:[ScreenShot], useLangs:Bool) -> [String:[[ScreenShot]]] {
-        
+    func splitScreenShotByLangs(rawScreenShots:[ScreenShot], useLangs:Bool) -> [String:[ScreenShot]] {
+
         var langToScreens = [String:[ScreenShot]]()
         
         for screen in rawScreenShots {
             
-            var lang = useLangs ? (screen.langId ?? NoLangID) : NoLangID
-            
-            if lang == "" {
-                lang = NoLangID
-            }
+            let lang = screen.screenShotLang(useLangs)
             
             var langArray:[ScreenShot]? = langToScreens[lang]
             if langArray == nil {
                 langArray = [ScreenShot]()
             }
+            
             langArray!.append(screen)
             langToScreens[lang] = langArray
             
         }
         
+        return langToScreens
+    }
+    
+    //Lang -> Platform -> Screenshot
+    func convertRawScreenShotsToDataSet(rawScreenShots:[ScreenShot], useLangs:Bool) -> [String:[[ScreenShot]]] {
+        
+        let langToScreens = splitScreenShotByLangs(rawScreenShots, useLangs: useLangs)
         let langScreenShots:[[ScreenShot]] = Array(langToScreens.values)
+        
         var final = [String:[[ScreenShot]]]()
         
         for langScreenShot in langScreenShots {
@@ -139,4 +143,35 @@ class ScreenshotsHandler {
     }
     
     
+    //MARK: - File management helper -
+    
+    func copyScreenShotsImagesToITMSP(allImagesPlatf:[[[ScreenShot]]]) {
+        
+        for allImages in allImagesPlatf {
+            for img in allImages {
+                for i in img {
+                    if i.screenType != .iUndefinedScreenShotType {
+                        let path = pathForImageOfScreenShot(i)
+                        copyScreenShot(i, toPath: path)
+                        i.md5 = md5(path) //made it here if for some reason md5 would be changed after copying
+                    }
+                }
+            }
+        }
+    }
+    
+    private func copyScreenShot(screenShot:ScreenShot, toPath path:String) {
+        do {
+            try
+                fileManager.copyItemAtPath(screenShot.path, toPath: path)
+        } catch {
+            assert(false)
+        }
+    }
+    
+    func pathForImageOfScreenShot(screenShot:ScreenShot) -> String {
+        return "\(ItunesConnectHandler.sharedInstance.itmspPath())/\(screenShot.nameForUpload)"
+    }
 }
+
+

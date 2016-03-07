@@ -20,11 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     func initDefaults() {
-        let inited = NSUserDefaults.standardUserDefaults().valueForKey("inited") as? Bool ?? false
-        if !inited {
-            NSUserDefaults.standardUserDefaults().setObject("/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms/bin/iTMSTransporter", forKey: "ITCPath")
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "inited")
-        }
+        NSUserDefaults.standardUserDefaults().registerDefaults([iTMSTransporterPathKey :DefaultiTMSTransporterPath])
     }
     
 }

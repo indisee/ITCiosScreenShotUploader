@@ -22,7 +22,7 @@ class SettingsViewController: NSViewController {
         
         ItunesConnectHandler.sharedInstance.fillCurrentValues()
         
-        pathControll.URL = NSURL(fileURLWithPath: ItunesConnectHandler.sharedInstance.ITCPath!)
+        pathControll.URL = NSURL(fileURLWithPath: ItunesConnectHandler.sharedInstance.ITCPath)
         field1.stringValue = ItunesConnectHandler.sharedInstance.ITMSUSER ?? ""
         field3.stringValue = ItunesConnectHandler.sharedInstance.ITMSSKU ?? ""
         passwordTF.stringValue = ItunesConnectHandler.sharedInstance.ITMSPASS ?? ""
@@ -31,11 +31,15 @@ class SettingsViewController: NSViewController {
     @IBAction func save(sender: AnyObject) {
         self.view.window?.makeFirstResponder(nil)
         
-       let ITMSPASS = passwordTF.stringValue
-       let ITMSUSER = field1.stringValue
-       let ITMSSKU = field3.stringValue
-       let ITCPath = (pathControll.URL?.path) ?? ""
-       ItunesConnectHandler.sharedInstance.saveCredentialsIncludingPassword(saveCheckBox.state == 1, user: ITMSUSER, sku: ITMSSKU, password: ITMSPASS, path: ITCPath)
+        let ITMSPASS = passwordTF.stringValue
+        let ITMSUSER = field1.stringValue
+        let ITMSSKU = field3.stringValue
+        let ITCPath = (pathControll.URL?.path) ?? ""
+        
+        let storage = DefaultsStorage()
+        
+        storage.saveCredentialsIncludingPassword(saveCheckBox.state == 1, user: ITMSUSER, sku: ITMSSKU, password: ITMSPASS, path: ITCPath)
+        ItunesConnectHandler.sharedInstance.fillCurrentValues()
     }
     
     @IBAction func changeDoSavePassword(sender: AnyObject) {

@@ -10,7 +10,7 @@
 		A90559E61C4F574F002E9CB1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559DE1C4F574F002E9CB1 /* Extensions.swift */; };
 		A90559E71C4F574F002E9CB1 /* ItunesConnectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559DF1C4F574F002E9CB1 /* ItunesConnectHandler.swift */; };
 		A90559E81C4F574F002E9CB1 /* ScreenShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559E11C4F574F002E9CB1 /* ScreenShot.swift */; };
-		A90559E91C4F574F002E9CB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559E31C4F574F002E9CB1 /* ViewController.swift */; };
+		A90559E91C4F574F002E9CB1 /* InitailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559E31C4F574F002E9CB1 /* InitailViewController.swift */; };
 		A90559EA1C4F574F002E9CB1 /* DranNDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559E51C4F574F002E9CB1 /* DranNDropView.swift */; };
 		A90559EC1C4F671E002E9CB1 /* ScreenshotsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559EB1C4F671E002E9CB1 /* ScreenshotsHandler.swift */; };
 		A90559EE1C4F739B002E9CB1 /* ScreenShotsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90559ED1C4F739B002E9CB1 /* ScreenShotsListViewController.swift */; };
@@ -27,6 +27,8 @@
 		A96AA67E1C547128008DECAF /* ScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA67A1C547128008DECAF /* ScreenShotCell.swift */; };
 		A96AA67F1C547128008DECAF /* ScreenShotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A96AA67B1C547128008DECAF /* ScreenShotCell.xib */; };
 		A96AA6811C547136008DECAF /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96AA6801C547136008DECAF /* GridLayout.swift */; };
+		A99066B71C8D0D2D0053753B /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99066B61C8D0D2C0053753B /* DefaultsStorage.swift */; };
+		A99066B91C8D34840053753B /* ITCMetaXMLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99066B81C8D34840053753B /* ITCMetaXMLHandler.swift */; };
 		A9CEFB211C4E433400897968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CEFB201C4E433400897968 /* AppDelegate.swift */; };
 		A9CEFB251C4E433400897968 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9CEFB241C4E433400897968 /* Assets.xcassets */; };
 		A9CEFB281C4E433400897968 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CEFB261C4E433400897968 /* Main.storyboard */; };
@@ -37,7 +39,7 @@
 		A90559DE1C4F574F002E9CB1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Managers/Extensions.swift; sourceTree = "<group>"; };
 		A90559DF1C4F574F002E9CB1 /* ItunesConnectHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesConnectHandler.swift; sourceTree = "<group>"; };
 		A90559E11C4F574F002E9CB1 /* ScreenShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShot.swift; sourceTree = "<group>"; };
-		A90559E31C4F574F002E9CB1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A90559E31C4F574F002E9CB1 /* InitailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitailViewController.swift; sourceTree = "<group>"; };
 		A90559E51C4F574F002E9CB1 /* DranNDropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DranNDropView.swift; sourceTree = "<group>"; };
 		A90559EB1C4F671E002E9CB1 /* ScreenshotsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsHandler.swift; sourceTree = "<group>"; };
 		A90559ED1C4F739B002E9CB1 /* ScreenShotsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShotsListViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +56,8 @@
 		A96AA67A1C547128008DECAF /* ScreenShotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenShotCell.swift; sourceTree = "<group>"; };
 		A96AA67B1C547128008DECAF /* ScreenShotCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreenShotCell.xib; sourceTree = "<group>"; };
 		A96AA6801C547136008DECAF /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		A99066B61C8D0D2C0053753B /* DefaultsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
+		A99066B81C8D34840053753B /* ITCMetaXMLHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITCMetaXMLHandler.swift; sourceTree = "<group>"; };
 		A9CEFB1D1C4E433400897968 /* ItunesScreenshotUploader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ItunesScreenshotUploader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CEFB201C4E433400897968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9CEFB241C4E433400897968 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,9 +94,11 @@
 		A90559DD1C4F574F002E9CB1 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				A99066B61C8D0D2C0053753B /* DefaultsStorage.swift */,
 				A90559EF1C4F75DB002E9CB1 /* Segues.swift */,
 				A90559DF1C4F574F002E9CB1 /* ItunesConnectHandler.swift */,
 				A90559EB1C4F671E002E9CB1 /* ScreenshotsHandler.swift */,
+				A99066B81C8D34840053753B /* ITCMetaXMLHandler.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -108,7 +114,7 @@
 		A90559E21C4F574F002E9CB1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				A90559E31C4F574F002E9CB1 /* ViewController.swift */,
+				A90559E31C4F574F002E9CB1 /* InitailViewController.swift */,
 				A90559ED1C4F739B002E9CB1 /* ScreenShotsListViewController.swift */,
 				A9055A161C50A66A002E9CB1 /* SettingsViewController.swift */,
 			);
@@ -250,14 +256,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A96AA6721C5374F8008DECAF /* BlockView.swift in Sources */,
-				A90559E91C4F574F002E9CB1 /* ViewController.swift in Sources */,
+				A90559E91C4F574F002E9CB1 /* InitailViewController.swift in Sources */,
 				A96AA6741C546EE5008DECAF /* Common.swift in Sources */,
 				A96AA6761C5470F7008DECAF /* HelperFunctions.swift in Sources */,
 				A90559E81C4F574F002E9CB1 /* ScreenShot.swift in Sources */,
+				A99066B71C8D0D2D0053753B /* DefaultsStorage.swift in Sources */,
 				A90559EE1C4F739B002E9CB1 /* ScreenShotsListViewController.swift in Sources */,
 				A9CEFB211C4E433400897968 /* AppDelegate.swift in Sources */,
 				A96AA67C1C547128008DECAF /* ScreeenShotsHeader.swift in Sources */,
 				A90559EC1C4F671E002E9CB1 /* ScreenshotsHandler.swift in Sources */,
+				A99066B91C8D34840053753B /* ITCMetaXMLHandler.swift in Sources */,
 				A90559F21C4F7770002E9CB1 /* Protocols.swift in Sources */,
 				A90559E71C4F574F002E9CB1 /* ItunesConnectHandler.swift in Sources */,
 				A96AA6621C532A10008DECAF /* AEXML.swift in Sources */,

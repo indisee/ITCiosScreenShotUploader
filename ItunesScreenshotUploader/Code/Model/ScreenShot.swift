@@ -41,7 +41,6 @@ enum ScreenShotType : String {
         
         return str
     }
-    
 }
 
 
@@ -89,6 +88,15 @@ class ScreenShot : NSObject {
         }
     }
     
+    func screenShotLang(useLangs:Bool) -> String {
+        var lang = useLangs ? (langId ?? NoLangID) : NoLangID
+        if lang == "" {
+            lang = NoLangID
+        }
+        return lang
+    }
+    
+    
     //MARK: - _ -
     
     func fillThumb() {
@@ -117,48 +125,70 @@ class ScreenShot : NSObject {
         let w = size.width
         let h = size.height
         
-        if (w == 640 && h == 920) ||
-            (w == 640 && h == 960) ||
-            (w == 960 && h == 600) ||
-            (w == 960 && h == 640) {
+        //to prevent misspelling
+        let i640:CGFloat    = 640
+        let i920:CGFloat    = 920
+        let i960:CGFloat    = 960
+        let i600:CGFloat    = 600
+        let i1096:CGFloat   = 1096
+        let i1136:CGFloat   = 1136
+        let i750:CGFloat    = 750
+        let i1334:CGFloat   = 1334
+        let i1242:CGFloat   = 1242
+        let i2208:CGFloat   = 2208
+        let i1024:CGFloat   = 1024
+        let i748:CGFloat    = 748
+        let i768:CGFloat    = 768
+        let i2048:CGFloat   = 2048
+        let i1496:CGFloat   = 1496
+        let i1536:CGFloat   = 1536
+        let i1004:CGFloat   = 1004
+        let i2008:CGFloat   = 2008
+        let i2732:CGFloat   = 2732
+        //        let <##>:CGFloat = <##>
+
+        if (w == i640 && h == i920) ||
+            (w == i640 && h == i960) ||
+            (w == i960 && h == i600) ||
+            (w == i960 && h == i640) {
                 //3.5
                 screenType = .iPhone4
         }
         
-        if (w == 640 && h == 1096) ||
-            (w == 640 && h == 1136) ||
-            (w == 1136 && h == 600) ||
-            (w == 1136 && h == 640) {
+        if (w == i640 && h == i1096) ||
+            (w == i640 && h == i1136) ||
+            (w == i1136 && h == i600) ||
+            (w == i1136 && h == i640) {
                 //4
                 screenType = .iPhone5
         }
         
-        if (w == 750 && h == 1334) ||
-            (w == 1334 && h == 750) {
+        if (w == i750 && h == i1334) ||
+            (w == i1334 && h == i750) {
                 //4.7
                 screenType = .iPhone6
         }
         
-        if (w == 1242 && h == 2208) ||
-            (w == 2208 && h == 1242) {
+        if (w == i1242 && h == i2208) ||
+            (w == i2208 && h == i1242) {
                 //5.5
                 screenType = .iPhone6Plus
         }
         
-        if (w == 1024 && h == 748) ||
-            (w == 1024 && h == 768) ||
-            (w == 2048 && h == 1496) ||
-            (w == 2048 && h == 1536) ||
-            (w == 768 && h == 1004) ||
-            (w == 768 && h == 1024) ||
-            (w == 1536 && h == 2008) ||
-            (w == 1536 && h == 2048) {
+        if (w == i1024 && h == i748) ||
+            (w == i1024 && h == i768) ||
+            (w == i2048 && h == i1496) ||
+            (w == i2048 && h == i1536) ||
+            (w == i768 && h == i1004) ||
+            (w == i768 && h == i1024) ||
+            (w == i1536 && h == i2008) ||
+            (w == i1536 && h == i2048) {
                 //ipad
                 screenType = .iPad
         }
         
-        if (w == 2732 && h == 2048) ||
-            (w == 2048 && h == 2732) {
+        if (w == i2732 && h == i2048) ||
+            (w == i2048 && h == i2732) {
                 //ipad pro
                 screenType = .iPadPro
         }

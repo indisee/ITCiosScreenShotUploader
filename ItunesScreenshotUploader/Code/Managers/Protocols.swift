@@ -9,7 +9,6 @@
 import Foundation
 
 
-let DropScreenShotsTask = "DropScreenShotsTasks"
 
 protocol FiniteTask : class {
     func didStartTask(taskKey:String)
