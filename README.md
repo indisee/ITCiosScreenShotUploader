@@ -2,13 +2,13 @@
 
 ![Alt text](Screenshots/1.png?raw=true "Title")![Alt text](Screenshots/2.png?raw=true "Title")	
 
-Small UI util to upload iOS screenshots to iTunesConnect for AppStore
+UI tool to upload iOS screenshots for AppStore to iTunes Connect
 
 ****
 OSX Deployment target 10.11 - because of some features of collection view 
 ****
 
-Wrapper around **iTMSTransporter** command line util from XCode (for default using */Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms/bin/iTMSTransporter*, path can be changed in settings)
+Wrapper around **iTMSTransporter** command line tool from XCode (for default using */Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms/bin/iTMSTransporter*, path can be changed in settings)
 
 ****
 ###Before use
@@ -47,7 +47,7 @@ Wrapper around **iTMSTransporter** command line util from XCode (for default usi
 
 ###Modes:
 
-* **same** - same list of screenshots will be uploaded for all locales, no matter how you name screenshots (this mode is the reason why util was born - I'm so bored uploading too many same screenshots to so many locales)
+* **same** - same list of screenshots will be uploaded for all locales, no matter how you name screenshots (this mode is the reason why tool was born - I'm so bored uploading too many same screenshots to so many locales)
 
 * **diff** - every locale will have its own screenshot set. Add locale name to image's file name, like **"[en-AU]screenshot_1.png"**. Unnamed screenshots will be ignored
 
