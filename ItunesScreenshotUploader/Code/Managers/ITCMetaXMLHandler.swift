@@ -123,11 +123,11 @@ class ITCMetaXMLHandler {
     
     private func indexOfLatestVersionFromElement(versions:AEXMLElement) -> Int {
         
-        var versionNumber:Double = 0.0
+        var versionNumber = "0"
         var versionIndex = 0
         
         for (i,e) in versions.children.enumerate() {
-            if let eVersion = Double(e.attributes["string"]!) {
+            if let eVersion = e.attributes["string"] {
                 if eVersion > versionNumber {
                     versionNumber = eVersion
                     versionIndex = i
