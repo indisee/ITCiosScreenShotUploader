@@ -114,26 +114,28 @@ class ScreenshotsHandler {
     }
     
     func screenShotForPath(_ path:String, name:String) -> (screenshot:ScreenShot?, isDirectory:Bool) {
-        
-        let attributes = try? fileManager.attributesOfItem(atPath: path)
-        
-        if let a = attributes {
-            let type = a["NSFileType"] as! String
-            if type == FileAttributeType.typeDirectory {
+        do{
+            let attr:[FileAttributeKey : Any] = try FileManager.default.attributesOfItem(atPath: path) as [FileAttributeKey : Any]
+            let a = attr
+            let type:String = a[FileAttributeKey.type] as! String
+            if type == FileAttributeType.typeDirectory.rawValue {
                 return (nil, true)
             } else {
                 if let i = imageForPath(path) {
                     let s = ScreenShot()
                     s.path = path
                     s.image = i
-                    s.fileSize = a["NSFileSize"] as! Int
+                    s.fileSize = a[FileAttributeKey.size] as! Int
                     s.name = name
                     return (s, false)
                 }
             }
-        }
+       
+        }catch{
         
+        }
         return (nil, false)
+
     }
     
     
