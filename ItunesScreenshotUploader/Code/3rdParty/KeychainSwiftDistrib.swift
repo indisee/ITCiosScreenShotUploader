@@ -21,12 +21,12 @@ import Foundation
 A collection of helper functions for saving text and data in the keychain.
 
 */
-public class KeychainSwift {
+open class KeychainSwift {
   
-  var lastQueryParameters: [String: NSObject]? // Used by the unit tests
+  var lastQueryParameters: [String: Any]? // Used by the unit tests
   
   /// Contains result code from the last operation. Value is noErr (0) for a successful result.
-  public var lastResultCode: OSStatus = noErr
+  open var lastResultCode: OSStatus = noErr
 
   var keyPrefix = "" // Can be useful in test.
   
@@ -35,7 +35,7 @@ public class KeychainSwift {
   Specify an access group that will be used to access keychain items. Access groups can be used to share keychain items between applications. When access group value is nil all application access groups are being accessed. Access group name is used by all functions: set, get, delete and clear.
 
   */
-  public var accessGroup: String?
+  open var accessGroup: String?
   
   public init() { }
   
@@ -59,10 +59,10 @@ public class KeychainSwift {
    - returns: True if the text was successfully written to the keychain.
 
   */
-  public func set(value: String, forKey key: String,
+  open func set(_ value: String, forKey key: String,
     withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
     
-    if let value = value.dataUsingEncoding(NSUTF8StringEncoding) {
+    if let value = value.data(using: String.Encoding.utf8) {
       return set(value, forKey: key, withAccess: access)
     }
     
@@ -80,7 +80,7 @@ public class KeychainSwift {
   - returns: True if the text was successfully written to the keychain.
   
   */
-  public func set(value: NSData, forKey key: String,
+  open func set(_ value: Data, forKey key: String,
     withAccess access: KeychainSwiftAccessOptions? = nil) -> Bool {
     
     delete(key) // Delete any existing key before saving it
@@ -94,12 +94,12 @@ public class KeychainSwift {
       KeychainSwiftConstants.attrAccount : prefixedKey,
       KeychainSwiftConstants.valueData   : value,
       KeychainSwiftConstants.accessible  : accessible
-    ]
+    ] as [String : Any]
       
-    query = addAccessGroupWhenPresent(query)
+    query = addAccessGroupWhenPresent(query as! [String : NSObject] )
     lastQueryParameters = query
     
-    lastResultCode = SecItemAdd(query as CFDictionaryRef, nil)
+    lastResultCode = SecItemAdd(query as CFDictionary, nil)
     
     return lastResultCode == noErr
   }
@@ -112,9 +112,9 @@ public class KeychainSwift {
   - returns: The text value from the keychain. Returns nil if unable to read the item.
   
   */
-  public func get(key: String) -> String? {
+  open func get(_ key: String) -> String? {
     if let data = getData(key) {
-      if let currentString = NSString(data: data, encoding: NSUTF8StringEncoding) as? String {
+      if let currentString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String {
         return currentString
       }
       
@@ -132,12 +132,12 @@ public class KeychainSwift {
   - returns: The text value from the keychain. Returns nil if unable to read the item.
   
   */
-  public func getData(key: String) -> NSData? {
+  open func getData(_ key: String) -> Data? {
     let prefixedKey = keyWithPrefix(key)
     
     var query: [String: NSObject] = [
       KeychainSwiftConstants.klass       : kSecClassGenericPassword,
-      KeychainSwiftConstants.attrAccount : prefixedKey,
+      KeychainSwiftConstants.attrAccount : prefixedKey as NSObject,
       KeychainSwiftConstants.returnData  : kCFBooleanTrue,
       KeychainSwiftConstants.matchLimit  : kSecMatchLimitOne ]
     
@@ -146,11 +146,11 @@ public class KeychainSwift {
     
     var result: AnyObject?
     
-    lastResultCode = withUnsafeMutablePointer(&result) {
-      SecItemCopyMatching(query, UnsafeMutablePointer($0))
+    lastResultCode = withUnsafeMutablePointer(to: &result) {
+      SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0))
     }
     
-    if lastResultCode == noErr { return result as? NSData }
+    if lastResultCode == noErr { return result as? Data }
     
     return nil
   }
@@ -163,17 +163,17 @@ public class KeychainSwift {
   - returns: True if the item was successfully deleted.
   
   */
-  public func delete(key: String) -> Bool {
+  open func delete(_ key: String) -> Bool {
     let prefixedKey = keyWithPrefix(key)
 
     var query: [String: NSObject] = [
       KeychainSwiftConstants.klass       : kSecClassGenericPassword,
-      KeychainSwiftConstants.attrAccount : prefixedKey ]
+      KeychainSwiftConstants.attrAccount : prefixedKey as NSObject ]
     
     query = addAccessGroupWhenPresent(query)
     lastQueryParameters = query
     
-    lastResultCode = SecItemDelete(query as CFDictionaryRef)
+    lastResultCode = SecItemDelete(query as CFDictionary)
     
     return lastResultCode == noErr
   }
@@ -185,26 +185,26 @@ public class KeychainSwift {
   - returns: True if the keychain items were successfully deleted.
   
   */
-  public func clear() -> Bool {
+  open func clear() -> Bool {
     var query: [String: NSObject] = [ kSecClass as String : kSecClassGenericPassword ]
     query = addAccessGroupWhenPresent(query)
     lastQueryParameters = query
     
-    lastResultCode = SecItemDelete(query as CFDictionaryRef)
+    lastResultCode = SecItemDelete(query as CFDictionary)
     
     return lastResultCode == noErr
   }
   
   /// Returns the key with currently set prefix.
-  func keyWithPrefix(key: String) -> String {
+  func keyWithPrefix(_ key: String) -> String {
     return "\(keyPrefix)\(key)"
   }
   
-  func addAccessGroupWhenPresent(items: [String: NSObject]) -> [String: NSObject] {
+  func addAccessGroupWhenPresent(_ items: [String: NSObject]) -> [String: NSObject] {
     guard let accessGroup = accessGroup else { return items }
     
     var result: [String: NSObject] = items
-    result[KeychainSwiftConstants.accessGroup] = accessGroup
+    result[KeychainSwiftConstants.accessGroup] = accessGroup as NSObject?
     return result
   }
 }
@@ -234,7 +234,7 @@ public enum KeychainSwiftAccessOptions {
   This is the default value for keychain items added without explicitly setting an accessibility constant.
   
   */
-  case AccessibleWhenUnlocked
+  case accessibleWhenUnlocked
   
   /**
   
@@ -243,7 +243,7 @@ public enum KeychainSwiftAccessOptions {
   This is recommended for items that need to be accessible only while the application is in the foreground. Items with this attribute do not migrate to a new device. Thus, after restoring from a backup of a different device, these items will not be present.
   
   */
-  case AccessibleWhenUnlockedThisDeviceOnly
+  case accessibleWhenUnlockedThisDeviceOnly
   
   /**
   
@@ -252,7 +252,7 @@ public enum KeychainSwiftAccessOptions {
   After the first unlock, the data remains accessible until the next restart. This is recommended for items that need to be accessed by background applications. Items with this attribute migrate to a new device when using encrypted backups.
   
   */
-  case AccessibleAfterFirstUnlock
+  case accessibleAfterFirstUnlock
   
   /**
   
@@ -261,7 +261,7 @@ public enum KeychainSwiftAccessOptions {
   After the first unlock, the data remains accessible until the next restart. This is recommended for items that need to be accessed by background applications. Items with this attribute do not migrate to a new device. Thus, after restoring from a backup of a different device, these items will not be present.
   
   */
-  case AccessibleAfterFirstUnlockThisDeviceOnly
+  case accessibleAfterFirstUnlockThisDeviceOnly
   
   /**
   
@@ -270,7 +270,7 @@ public enum KeychainSwiftAccessOptions {
   This is not recommended for application use. Items with this attribute migrate to a new device when using encrypted backups.
   
   */
-  case AccessibleAlways
+  case accessibleAlways
   
   /**
   
@@ -279,7 +279,7 @@ public enum KeychainSwiftAccessOptions {
   This is recommended for items that only need to be accessible while the application is in the foreground. Items with this attribute never migrate to a new device. After a backup is restored to a new device, these items are missing. No items can be stored in this class on devices without a passcode. Disabling the device passcode causes all items in this class to be deleted.
   
   */
-  case AccessibleWhenPasscodeSetThisDeviceOnly
+  case accessibleWhenPasscodeSetThisDeviceOnly
   
   /**
   
@@ -288,38 +288,38 @@ public enum KeychainSwiftAccessOptions {
   This is not recommended for application use. Items with this attribute do not migrate to a new device. Thus, after restoring from a backup of a different device, these items will not be present.
   
   */
-  case AccessibleAlwaysThisDeviceOnly
+  case accessibleAlwaysThisDeviceOnly
   
   static var defaultOption: KeychainSwiftAccessOptions {
-    return .AccessibleWhenUnlocked
+    return .accessibleWhenUnlocked
   }
   
   var value: String {
     switch self {
-    case .AccessibleWhenUnlocked:
+    case .accessibleWhenUnlocked:
       return toString(kSecAttrAccessibleWhenUnlocked)
       
-    case .AccessibleWhenUnlockedThisDeviceOnly:
+    case .accessibleWhenUnlockedThisDeviceOnly:
       return toString(kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
       
-    case .AccessibleAfterFirstUnlock:
+    case .accessibleAfterFirstUnlock:
       return toString(kSecAttrAccessibleAfterFirstUnlock)
       
-    case .AccessibleAfterFirstUnlockThisDeviceOnly:
+    case .accessibleAfterFirstUnlockThisDeviceOnly:
       return toString(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly)
       
-    case .AccessibleAlways:
+    case .accessibleAlways:
       return toString(kSecAttrAccessibleAlways)
       
-    case .AccessibleWhenPasscodeSetThisDeviceOnly:
+    case .accessibleWhenPasscodeSetThisDeviceOnly:
       return toString(kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly)
       
-    case .AccessibleAlwaysThisDeviceOnly:
+    case .accessibleAlwaysThisDeviceOnly:
       return toString(kSecAttrAccessibleAlwaysThisDeviceOnly)
     }
   }
   
-  func toString(value: CFStringRef) -> String {
+  func toString(_ value: CFString) -> String {
     return KeychainSwiftConstants.toString(value)
   }
 }
@@ -350,7 +350,7 @@ public struct KeychainSwiftConstants {
   */
   public static var accessible: String { return toString(kSecAttrAccessible) }
 
-  static func toString(value: CFStringRef) -> String {
+  static func toString(_ value: CFString) -> String {
     return value as String
   }
 }

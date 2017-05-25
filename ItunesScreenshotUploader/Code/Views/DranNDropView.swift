@@ -11,26 +11,26 @@ import Foundation
 
 class DranNDropView: NSView {
     
-    private let q = NSOperationQueue()
+    fileprivate let q = OperationQueue()
     
-    internal private(set) var screenShotsList:[ScreenShot]?
+    internal fileprivate(set) var screenShotsList:[ScreenShot]?
     weak var delegate: FiniteTask?
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        registerForDraggedTypes([NSFilenamesPboardType])
+        register(forDraggedTypes: [NSFilenamesPboardType])
         
         setupUI()
     }
     
     func setupUI() {
-        setBackGroundColor(NSColor.lightGrayColor())
+        setBackGroundColor(NSColor.lightGray)
     }
     
-    func setBackGroundColor(color:NSColor) {
+    func setBackGroundColor(_ color:NSColor) {
         let l = CALayer()
-        l.backgroundColor = color.CGColor
+        l.backgroundColor = color.cgColor
         l.cornerRadius = 5
         self.wantsLayer = true
         self.layer = l
@@ -39,32 +39,32 @@ class DranNDropView: NSView {
     
     //MARK: - Dragging -
     
-    override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
-        setBackGroundColor(NSColor.grayColor())
+    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+        setBackGroundColor(NSColor.gray)
         
         let sourceDragMask = sender.draggingSourceOperationMask()
         let pboard = sender.draggingPasteboard()
-        if pboard.availableTypeFromArray([NSFilenamesPboardType]) == NSFilenamesPboardType {
-            if sourceDragMask.rawValue & NSDragOperation.Generic.rawValue != 0 {
-                return NSDragOperation.Generic
+        if pboard.availableType(from: [NSFilenamesPboardType]) == NSFilenamesPboardType {
+            if sourceDragMask.rawValue & NSDragOperation.generic.rawValue != 0 {
+                return NSDragOperation.generic
             }
         }
-        return NSDragOperation.None
+        return NSDragOperation()
     }
     
-    override func draggingExited(sender: NSDraggingInfo?) {
-        setBackGroundColor(NSColor.lightGrayColor())
+    override func draggingExited(_ sender: NSDraggingInfo?) {
+        setBackGroundColor(NSColor.lightGray)
     }
     
-    override func draggingUpdated(sender: NSDraggingInfo) -> NSDragOperation {
-        return NSDragOperation.Generic
+    override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+        return NSDragOperation.generic
     }
     
-    override func prepareForDragOperation(sender: NSDraggingInfo) -> Bool {
+    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
         return true
     }
     
-    override func performDragOperation(sender: NSDraggingInfo) -> Bool {
+    override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         
         if sender.draggingSource() as? DranNDropView != self {
 
@@ -73,14 +73,14 @@ class DranNDropView: NSView {
             if let d = self.delegate {
                 
                 d.didStartTask(DropScreenShotsTask)
-                self.setBackGroundColor(NSColor.lightGrayColor())
+                self.setBackGroundColor(NSColor.lightGray)
 
-                let op = NSBlockOperation()
+                let op = BlockOperation()
                 
                 op.addExecutionBlock { [unowned self, op] () -> Void in
                     
                     let pBoard = sender.draggingPasteboard()
-                    if let pathes = pBoard.propertyListForType("NSFilenamesPboardType") as? [String] {
+                    if let pathes = pBoard.propertyList(forType: "NSFilenamesPboardType") as? [String] {
                         var screenshots = [ScreenShot]()
                         let screenshotsHandler = ScreenshotsHandler()
                         for path in pathes {
@@ -88,8 +88,8 @@ class DranNDropView: NSView {
                             screenshots += s
                         }
                         
-                        if !op.cancelled {
-                            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                        if !op.isCancelled {
+                            OperationQueue.main.addOperation({ () -> Void in
                                 self.screenShotsList = screenshots
                                 d.didEndTask(DropScreenShotsTask)
                             })

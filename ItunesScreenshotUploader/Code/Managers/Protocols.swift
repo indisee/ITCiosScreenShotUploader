@@ -11,6 +11,6 @@ import Foundation
 
 
 protocol FiniteTask : class {
-    func didStartTask(taskKey:String)
-    func didEndTask(taskKey:String)
+    func didStartTask(_ taskKey:String)
+    func didEndTask(_ taskKey:String)
 }

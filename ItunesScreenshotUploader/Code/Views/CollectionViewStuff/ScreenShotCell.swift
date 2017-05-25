@@ -23,17 +23,17 @@ class ScreenShotCell: NSCollectionViewItem {
     
     override var highlightState: NSCollectionViewItemHighlightState {
         didSet {
-            if highlightState == .ForSelection {
-                self.view.layer?.borderColor = NSColor.lightGrayColor().CGColor
+            if highlightState == .forSelection {
+                self.view.layer?.borderColor = NSColor.lightGray.cgColor
                 self.view.layer?.borderWidth = 2
             }
         }
     }
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
-            if selected {
-                self.view.layer?.borderColor = NSColor.grayColor().CGColor
+            if isSelected {
+                self.view.layer?.borderColor = NSColor.gray.cgColor
                 self.view.layer?.borderWidth = 2
             } else {
                 self.view.layer?.borderWidth = 0
@@ -43,17 +43,17 @@ class ScreenShotCell: NSCollectionViewItem {
     
     //MARK: - Open image actinos -
     
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
         if theEvent.clickCount == 2 {
             openImage()
         } else {
-            super.mouseDown(theEvent)
+            super.mouseDown(with: theEvent)
         }
     }
     
     func openImage() {
         if let image = representedObject as? ScreenShot {
-            NSWorkspace.sharedWorkspace().openFile(image.path)
+            NSWorkspace.shared().openFile(image.path)
         }
     }
     

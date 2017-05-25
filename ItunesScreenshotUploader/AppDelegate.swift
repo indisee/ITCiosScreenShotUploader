@@ -11,12 +11,12 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         initDefaults()
     }
     
     func initDefaults() {
-        NSUserDefaults.standardUserDefaults().registerDefaults([iTMSTransporterPathKey :DefaultiTMSTransporterPath])
+        UserDefaults.standard.register(defaults: [iTMSTransporterPathKey :DefaultiTMSTransporterPath])
     }
     
 }

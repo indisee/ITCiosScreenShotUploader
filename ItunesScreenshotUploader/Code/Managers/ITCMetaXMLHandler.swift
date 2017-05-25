@@ -11,7 +11,7 @@ import Foundation
 
 class ITCMetaXMLHandler {
     
-    private let q = NSOperationQueue()
+    fileprivate let q = OperationQueue()
     
     
     //MARK: -  -
@@ -23,16 +23,16 @@ class ITCMetaXMLHandler {
     
     //MARK: - Helpers -
     
-    private func writeXmlBackToMetaFile(xml:AEXMLDocument) {
+    fileprivate func writeXmlBackToMetaFile(_ xml:AEXMLDocument) {
         do {
-            try xml.root.xmlString.writeToFile(metaXmlPath, atomically: false, encoding: NSUTF8StringEncoding)
+            try xml.root.xmlString.write(toFile: metaXmlPath, atomically: false, encoding: String.Encoding.utf8)
         }
         catch {
             assert(false)
         }
     }
     
-    private func replaceChildrensOfElement(element:AEXMLElement, newChildrens:[AEXMLElement]?) -> AEXMLElement {
+    fileprivate func replaceChildrensOfElement(_ element:AEXMLElement, newChildrens:[AEXMLElement]?) -> AEXMLElement {
         
         for ch in element.children {
             ch.removeFromParent()
@@ -49,7 +49,7 @@ class ITCMetaXMLHandler {
     
     //MARK: - Meta stuff -
     
-    private func xmlNodeFromScreenShot(screenShot:ScreenShot, position:Int) -> AEXMLElement? {
+    fileprivate func xmlNodeFromScreenShot(_ screenShot:ScreenShot, position:Int) -> AEXMLElement? {
         
         if position > 5 || screenShot.screenType == .iUndefinedScreenShotType {
             return nil
@@ -79,10 +79,10 @@ class ITCMetaXMLHandler {
         
     }
     
-    private func getMetaData() -> AEXMLDocument? {
+    fileprivate func getMetaData() -> AEXMLDocument? {
         
         guard let
-            data = NSData(contentsOfFile: metaXmlPath)
+            data = try? Data(contentsOf: URL(fileURLWithPath: metaXmlPath))
             else { return nil }
         do {
             let xmlDoc = try AEXMLDocument(xmlData: data)
@@ -95,7 +95,7 @@ class ITCMetaXMLHandler {
     }
     
     
-    private func getLocalesForMetadata(xml:AEXMLDocument? = nil) -> AEXMLElement? {
+    fileprivate func getLocalesForMetadata(_ xml:AEXMLDocument? = nil) -> AEXMLElement? {
         
         var xmlDoc:AEXMLDocument! = xml
         
@@ -121,12 +121,12 @@ class ITCMetaXMLHandler {
     }
     
     
-    private func indexOfLatestVersionFromElement(versions:AEXMLElement) -> Int {
+    fileprivate func indexOfLatestVersionFromElement(_ versions:AEXMLElement) -> Int {
         
         var versionNumber = "0"
         var versionIndex = 0
         
-        for (i,e) in versions.children.enumerate() {
+        for (i,e) in versions.children.enumerated() {
             if let eVersion = e.attributes["string"] {
                 if eVersion > versionNumber {
                     versionNumber = eVersion
@@ -141,7 +141,7 @@ class ITCMetaXMLHandler {
     
     //MARK: - XML helpers -
     
-    func localesSortedByLang(locales:[AEXMLElement]) -> [String:AEXMLElement] {
+    func localesSortedByLang(_ locales:[AEXMLElement]) -> [String:AEXMLElement] {
         
         var localesByLang:[String:AEXMLElement] = [String:AEXMLElement]()
         for loc in locales {
@@ -152,11 +152,11 @@ class ITCMetaXMLHandler {
         return localesByLang
     }
     
-    func mandatoryScreenshotsForMode(mode:ScreenShotUploadingMode, fromRaw raw:[String:[[ScreenShot]]], forLangs langs:[String:AEXMLElement]) -> [String:[[ScreenShot]]] {
+    func mandatoryScreenshotsForMode(_ mode:ScreenShotUploadingMode, fromRaw raw:[String:[[ScreenShot]]], forLangs langs:[String:AEXMLElement]) -> [String:[[ScreenShot]]] {
         
         var screenShots = [String:[[ScreenShot]]]()
         
-        if mode == .SameScreenShotUploadingMode {
+        if mode == .sameScreenShotUploadingMode {
             for lang in Array(langs.keys) {
                 screenShots["[\(lang)]"] = raw[NoLangID]!
             }
@@ -171,16 +171,16 @@ class ITCMetaXMLHandler {
     
     //MARK: - -
     
-    func updateMetadataForScreenShots(rawScreenShots:[String:[[ScreenShot]]], uploadType:ScreenShotUploadingMode, callback:(status:CallbackStatus)->Void) {
+    func updateMetadataForScreenShots(_ rawScreenShots:[String:[[ScreenShot]]], uploadType:ScreenShotUploadingMode, callback:@escaping (_ status:CallbackStatus)->Void) {
         
-        let op = NSBlockOperation()
+        let op = BlockOperation()
         
         op.addExecutionBlock { [unowned self, op] () -> Void in
             
             let fail = {()->Void in
-                if !op.cancelled {
-                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                        callback(status: .FailStatus)
+                if !op.isCancelled {
+                    OperationQueue.main.addOperation({ () -> Void in
+                        callback(.failStatus)
                     })
                 }
             }
@@ -211,9 +211,9 @@ class ITCMetaXMLHandler {
                     return
                 }
                 
-                if !op.cancelled {
-                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                        callback(status: .SuccessStatus)
+                if !op.isCancelled {
+                    OperationQueue.main.addOperation({ () -> Void in
+                        callback(.successStatus)
                     })
                 }
             } else {
@@ -227,7 +227,7 @@ class ITCMetaXMLHandler {
     }
     
     
-    private func generateFinalXMLFromCurrentLocales(localesByLang:[String:AEXMLElement], screenShots:[String:[[ScreenShot]]]) -> AEXMLElement {
+    fileprivate func generateFinalXMLFromCurrentLocales(_ localesByLang:[String:AEXMLElement], screenShots:[String:[[ScreenShot]]]) -> AEXMLElement {
         
         let finalLocales = AEXMLElement("locales", value: nil, attributes: nil)
         
@@ -244,7 +244,7 @@ class ITCMetaXMLHandler {
                     var i = 1
                     for screen in platformScreens {
                         if let el = self.xmlNodeFromScreenShot(screen, position: i) {
-                            ++i
+                            i += 1
                             langScreenshots.append(el)
                         }
                     }

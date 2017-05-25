@@ -9,6 +9,6 @@
 import Cocoa
 
 class BlockView: NSView {
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
     }
 }

@@ -9,8 +9,8 @@
 import Cocoa
 
 enum ScreenShotUploadingMode : Int {
-    case SameScreenShotUploadingMode = 0
-    case DiffScreenShotUploadingMode
+    case sameScreenShotUploadingMode = 0
+    case diffScreenShotUploadingMode
 }
 
 class InitailViewController: NSViewController {
@@ -26,8 +26,8 @@ class InitailViewController: NSViewController {
         setupUI()
     }
     
-    private func setupUI() {
-        spinner.hidden = true
+    fileprivate func setupUI() {
+        spinner.isHidden = true
         dragNDropView.delegate = self
     }
     
@@ -35,10 +35,10 @@ class InitailViewController: NSViewController {
     //MARK: - Go next -
     
     func goToScreenshotsList() {
-        self.performSegueWithIdentifier("ScreenShotsListViewControllerSegueID", sender: self)
+        self.performSegue(withIdentifier: "ScreenShotsListViewControllerSegueID", sender: self)
     }
     
-    override func prepareForSegue(segue: NSStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         let destination:ScreenShotsListViewController = segue.destinationController as! ScreenShotsListViewController
         destination.screenShotsList = dragNDropView.screenShotsList
         destination.segue = segue as? ReplaceSegue
@@ -50,20 +50,20 @@ class InitailViewController: NSViewController {
 
 extension InitailViewController : FiniteTask {
     
-    func didEndTask(taskKey:String) {
+    func didEndTask(_ taskKey:String) {
         if taskKey == DropScreenShotsTask {
-            notion.hidden = false
-            screenInfoLbl.hidden = false
-            spinner.hidden = true
+            notion.isHidden = false
+            screenInfoLbl.isHidden = false
+            spinner.isHidden = true
             goToScreenshotsList()
         }
     }
     
-    func didStartTask(taskKey:String) {
+    func didStartTask(_ taskKey:String) {
         if taskKey == DropScreenShotsTask {
-            notion.hidden = true
-            screenInfoLbl.hidden = true
-            spinner.hidden = false
+            notion.isHidden = true
+            screenInfoLbl.isHidden = true
+            spinner.isHidden = false
             spinner.startAnimation(nil)
         }
     }
