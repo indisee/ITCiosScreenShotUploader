@@ -10,22 +10,22 @@ import Foundation
 import Cocoa
 
 extension NSImage {
-    var imageRepresentation: NSData {
-        return NSBitmapImageRep(data: TIFFRepresentation!)!.representationUsingType(.NSPNGFileType, properties: [:])!
+    var imageRepresentation: Data {
+        return NSBitmapImageRep(data: tiffRepresentation!)!.representation(using: .PNG, properties: [:])!
     }
-    func savePNG(path:String) -> Bool {
-        return imageRepresentation.writeToFile(path, atomically: true)
+    func savePNG(_ path:String) -> Bool {
+        return ((try? imageRepresentation.write(to: URL(fileURLWithPath: path), options: [.atomic])) != nil)
     }
 }
 
 extension NSImage {
-    func resizeImage(width: CGFloat, _ height: CGFloat) -> NSImage {
-        let img = NSImage(size: CGSizeMake(width, height))
+    func resizeImage(_ width: CGFloat, _ height: CGFloat) -> NSImage {
+        let img = NSImage(size: CGSize(width: width, height: height))
         
         img.lockFocus()
-        let ctx = NSGraphicsContext.currentContext()
-        ctx?.imageInterpolation = .High
-        self.drawInRect(NSMakeRect(0, 0, width, height), fromRect: NSMakeRect(0, 0, size.width, size.height), operation: .CompositeCopy, fraction: 1)
+        let ctx = NSGraphicsContext.current()
+        ctx?.imageInterpolation = .high
+        self.draw(in: NSMakeRect(0, 0, width, height), from: NSMakeRect(0, 0, size.width, size.height), operation: .copy, fraction: 1)
         img.unlockFocus()
         
         return img

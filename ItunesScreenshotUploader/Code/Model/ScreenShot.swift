@@ -49,7 +49,7 @@ class ScreenShot : NSObject {
     
     var thumb:NSImage = NSImage()
     
-    private var _image:NSImage = NSImage()
+    fileprivate var _image:NSImage = NSImage()
     var image:NSImage! {
         set {
             _image = newValue
@@ -81,14 +81,14 @@ class ScreenShot : NSObject {
     var nameForUpload:String {
         get {
             var temp = name as NSString
-            temp = temp.stringByReplacingOccurrencesOfString("[", withString: "")
-            temp = temp.stringByReplacingOccurrencesOfString("]", withString: "")
-            temp = temp.stringByReplacingOccurrencesOfString(" ", withString: "_")
+            temp = temp.replacingOccurrences(of: "[", with: "") as NSString
+            temp = temp.replacingOccurrences(of: "]", with: "") as NSString
+            temp = temp.replacingOccurrences(of: " ", with: "_") as NSString
             return "\(screenType.rawValue)__\(temp)"
         }
     }
     
-    func screenShotLang(useLangs:Bool) -> String {
+    func screenShotLang(_ useLangs:Bool) -> String {
         var lang = useLangs ? (langId ?? NoLangID) : NoLangID
         if lang == "" {
             lang = NoLangID

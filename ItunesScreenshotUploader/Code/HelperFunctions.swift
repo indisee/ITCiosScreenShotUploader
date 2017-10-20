@@ -8,14 +8,14 @@
 
 import Foundation
 
-func matchesForRegexInText(regex: String!, text: String!) -> [String] {
+func matchesForRegexInText(_ regex: String!, text: String!) -> [String] {
     
     do {
         let regex = try NSRegularExpression(pattern: regex, options: [])
         let nsString = text as NSString
-        let results = regex.matchesInString(text,
+        let results = regex.matches(in: text,
             options: [], range: NSMakeRange(0, nsString.length))
-        return results.map { nsString.substringWithRange($0.range)}
+        return results.map { nsString.substring(with: $0.range)}
     } catch let error as NSError {
         print("invalid regex: \(error.localizedDescription)")
         return []
@@ -23,17 +23,17 @@ func matchesForRegexInText(regex: String!, text: String!) -> [String] {
 }
 
 
-func md5(path:String) -> String {
-    let task = NSTask()
+func md5(_ path:String) -> String {
+    let task = Process()
     task.launchPath = "/sbin/md5"
     task.arguments = [path]
     
-    let pipe = NSPipe()
+    let pipe = Pipe()
     task.standardOutput = pipe
     task.launch()
     
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output: NSString = NSString(data: data, encoding: NSUTF8StringEncoding)!
-    let md5 = output.componentsSeparatedByString(" ").last!
+    let output: NSString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
+    let md5 = output.components(separatedBy: " ").last!
     return md5
 }

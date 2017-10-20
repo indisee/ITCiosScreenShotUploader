@@ -10,13 +10,13 @@ import Foundation
 
 class DefaultsStorage {
     
-    lazy private var keychain = KeychainSwift()
+    lazy fileprivate var keychain = KeychainSwift()
 
-    func saveCredentialsIncludingPassword(savePassword:Bool, user:String, sku:String, password:String, path:String) {
+    func saveCredentialsIncludingPassword(_ savePassword:Bool, user:String, sku:String, password:String, path:String) {
         
-        NSUserDefaults.standardUserDefaults().setValue(user, forKey: UserNameKey)
-        NSUserDefaults.standardUserDefaults().setValue(sku, forKey: SKUKey)
-        NSUserDefaults.standardUserDefaults().setValue(path, forKey: iTMSTransporterPathKey)
+        UserDefaults.standard.setValue(user, forKey: UserNameKey)
+        UserDefaults.standard.setValue(sku, forKey: SKUKey)
+        UserDefaults.standard.setValue(path, forKey: iTMSTransporterPathKey)
         
         if savePassword {
             keychain.set(password, forKey: PasswordKey)
@@ -26,7 +26,7 @@ class DefaultsStorage {
     }
     
     var userName:String {
-        return NSUserDefaults.standardUserDefaults().valueForKey(UserNameKey) as? String ?? ""
+        return UserDefaults.standard.value(forKey: UserNameKey) as? String ?? ""
     }
     
     var password:String {
@@ -34,11 +34,11 @@ class DefaultsStorage {
     }
     
     var pathToTransporter:String {
-        return NSUserDefaults.standardUserDefaults().valueForKey(iTMSTransporterPathKey) as? String ?? ""
+        return UserDefaults.standard.value(forKey: iTMSTransporterPathKey) as? String ?? ""
     }
     
     var sku:String {
-        return NSUserDefaults.standardUserDefaults().valueForKey(SKUKey) as? String ?? ""
+        return UserDefaults.standard.value(forKey: SKUKey) as? String ?? ""
     }
 
 }

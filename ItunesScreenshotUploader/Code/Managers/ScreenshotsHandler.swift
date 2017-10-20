@@ -11,9 +11,9 @@ import Cocoa
 
 class ScreenshotsHandler {
     
-    private let fileManager = NSFileManager.defaultManager()
+    fileprivate let fileManager = FileManager.default
     
-    func splitScreenShotByLangs(rawScreenShots:[ScreenShot], useLangs:Bool) -> [String:[ScreenShot]] {
+    func splitScreenShotByLangs(_ rawScreenShots:[ScreenShot], useLangs:Bool) -> [String:[ScreenShot]] {
 
         var langToScreens = [String:[ScreenShot]]()
         
@@ -35,7 +35,7 @@ class ScreenshotsHandler {
     }
     
     //Lang -> Platform -> Screenshot
-    func convertRawScreenShotsToDataSet(rawScreenShots:[ScreenShot], useLangs:Bool) -> [String:[[ScreenShot]]] {
+    func convertRawScreenShotsToDataSet(_ rawScreenShots:[ScreenShot], useLangs:Bool) -> [String:[[ScreenShot]]] {
         
         let langToScreens = splitScreenShotByLangs(rawScreenShots, useLangs: useLangs)
         let langScreenShots:[[ScreenShot]] = Array(langToScreens.values)
@@ -57,7 +57,7 @@ class ScreenshotsHandler {
             }
             
             var platforms = Array(langPlatforms.values)
-            platforms = platforms.sort({ (sc1, sc2) -> Bool in
+            platforms = platforms.sorted(by: { (sc1, sc2) -> Bool in
                 let screen1 = sc1[0]
                 let screen2 = sc2[0]
                 
@@ -74,10 +74,10 @@ class ScreenshotsHandler {
         return final
     }
     
-    func getAllScreenshotsFromDirectory(pathDir:String) -> [ScreenShot] {
+    func getAllScreenshotsFromDirectory(_ pathDir:String) -> [ScreenShot] {
         
         var screens = [ScreenShot]()
-        let filelist = try? fileManager.contentsOfDirectoryAtPath(pathDir)
+        let filelist = try? fileManager.contentsOfDirectory(atPath: pathDir)
         
         if filelist != nil {
             for filename in filelist! {
@@ -97,7 +97,7 @@ class ScreenshotsHandler {
             
         } else {
             let fullPath = pathDir
-            let components = pathDir.componentsSeparatedByString("/")
+            let components = pathDir.components(separatedBy: "/")
             if let filename = components.last {
                 let (s, isDir) = screenShotForPath(fullPath, name: filename)
                 
@@ -113,31 +113,33 @@ class ScreenshotsHandler {
         return screens
     }
     
-    func screenShotForPath(path:String, name:String) -> (screenshot:ScreenShot?, isDirectory:Bool) {
-        
-        let attributes = try? fileManager.attributesOfItemAtPath(path)
-        
-        if let a = attributes {
-            let type = a["NSFileType"] as! String
-            if type == NSFileTypeDirectory {
+    func screenShotForPath(_ path:String, name:String) -> (screenshot:ScreenShot?, isDirectory:Bool) {
+        do{
+            let attr:[FileAttributeKey : Any] = try FileManager.default.attributesOfItem(atPath: path) as [FileAttributeKey : Any]
+            let a = attr
+            let type:String = a[FileAttributeKey.type] as! String
+            if type == FileAttributeType.typeDirectory.rawValue {
                 return (nil, true)
             } else {
                 if let i = imageForPath(path) {
                     let s = ScreenShot()
                     s.path = path
                     s.image = i
-                    s.fileSize = a["NSFileSize"] as! Int
+                    s.fileSize = a[FileAttributeKey.size] as! Int
                     s.name = name
                     return (s, false)
                 }
             }
-        }
+       
+        }catch{
         
+        }
         return (nil, false)
+
     }
     
     
-    func imageForPath(path:String) -> NSImage? {
+    func imageForPath(_ path:String) -> NSImage? {
         let image = NSImage(contentsOfFile: path)
         return image
     }
@@ -145,7 +147,7 @@ class ScreenshotsHandler {
     
     //MARK: - File management helper -
     
-    func copyScreenShotsImagesToITMSP(allImagesPlatf:[[[ScreenShot]]]) {
+    func copyScreenShotsImagesToITMSP(_ allImagesPlatf:[[[ScreenShot]]]) {
         
         for allImages in allImagesPlatf {
             for img in allImages {
@@ -160,16 +162,16 @@ class ScreenshotsHandler {
         }
     }
     
-    private func copyScreenShot(screenShot:ScreenShot, toPath path:String) {
+    fileprivate func copyScreenShot(_ screenShot:ScreenShot, toPath path:String) {
         do {
             try
-                fileManager.copyItemAtPath(screenShot.path, toPath: path)
+                fileManager.copyItem(atPath: screenShot.path, toPath: path)
         } catch {
             assert(false)
         }
     }
     
-    func pathForImageOfScreenShot(screenShot:ScreenShot) -> String {
+    func pathForImageOfScreenShot(_ screenShot:ScreenShot) -> String {
         return "\(ItunesConnectHandler.sharedInstance.itmspPath())/\(screenShot.nameForUpload)"
     }
 }

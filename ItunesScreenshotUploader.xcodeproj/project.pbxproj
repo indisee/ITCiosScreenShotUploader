@@ -215,6 +215,7 @@
 				TargetAttributes = {
 					A9CEFB1C1C4E433400897968 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -385,6 +386,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ItunesScreenshotUploader/ItunesScreenshotUploader-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -399,6 +401,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.2tickets2dublin.ItunesScreenshotUploader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ItunesScreenshotUploader/ItunesScreenshotUploader-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

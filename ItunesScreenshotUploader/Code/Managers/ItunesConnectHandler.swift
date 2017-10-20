@@ -10,15 +10,15 @@ import Foundation
 import Cocoa
 
 enum CallbackStatus : Int32 {
-    case SuccessStatus
-    case FailStatus
+    case successStatus
+    case failStatus
     
     init(rawValue:Int32) {
         if rawValue == 0 {
-            self = .SuccessStatus
+            self = .successStatus
             return
         }
-        self = .FailStatus
+        self = .failStatus
     }
 }
 
@@ -29,19 +29,19 @@ class ItunesConnectHandler {
     static let sharedInstance = ItunesConnectHandler()
     
     let credStorage = DefaultsStorage()
-    let fileManager = NSFileManager.defaultManager()
+    let fileManager = FileManager.default
     
-    internal private(set) var ITCPath:String     = ""
-    internal private(set) var ITMSUSER:String    = ""
-    internal private(set) var ITMSPASS:String    = ""
-    internal private(set) var ITMSSKU:String     = ""
+    internal fileprivate(set) var ITCPath:String     = ""
+    internal fileprivate(set) var ITMSUSER:String    = ""
+    internal fileprivate(set) var ITMSPASS:String    = ""
+    internal fileprivate(set) var ITMSSKU:String     = ""
     
-    private let q = NSOperationQueue()
+    fileprivate let q = OperationQueue()
     
     
     //MARK: - Helpers -
     
-    private let pathToStore = "\(NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true)[0] as String)/iTunesUploader/"
+    fileprivate let pathToStore = "\(NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as String)/iTunesUploader/"
     
     internal func itmspPath() -> String {
         return "\(pathToStore)\(ITMSSKU).itmsp"
@@ -57,7 +57,7 @@ class ItunesConnectHandler {
     func allCredentialValuesAreFilled() -> Bool {
         fillCurrentValues()
         
-        let launchPathExists = fileManager.fileExistsAtPath(ITCPath)
+        let launchPathExists = fileManager.fileExists(atPath: ITCPath)
         
         if ITMSUSER == "" || ITMSPASS == "" || ITMSSKU == "" || !launchPathExists {
             return false
@@ -68,22 +68,22 @@ class ItunesConnectHandler {
     
     //MARK: - ITC -
     
-    private func executeITCCommand(arguments:[String], callback:(status:CallbackStatus)->Void, progressBlock:((str:String)->Void)? = nil) {
+    fileprivate func executeITCCommand(_ arguments:[String], callback:@escaping (_ status:CallbackStatus)->Void, progressBlock:((_ str:String)->Void)? = nil) {
         
         var isDir : ObjCBool = false
-        if !fileManager.fileExistsAtPath(pathToStore, isDirectory: &isDir) {
+        if !fileManager.fileExists(atPath: pathToStore, isDirectory: &isDir) {
             do {
-                try fileManager.createDirectoryAtPath(pathToStore, withIntermediateDirectories: true, attributes: nil)
+                try fileManager.createDirectory(atPath: pathToStore, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 assert(false)
             }
         }
         
-        let op = NSBlockOperation()
+        let op = BlockOperation()
         
         op.addExecutionBlock { () -> Void in
             
-            let task = NSTask()
+            let task = Process()
             
             print("itunes uploader \(self.ITCPath)")
             print("——————")
@@ -97,9 +97,9 @@ class ItunesConnectHandler {
             
             let status = task.terminationStatus
             
-            if !op.cancelled {
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    callback(status:CallbackStatus(rawValue: status))
+            if !op.isCancelled {
+                OperationQueue.main.addOperation({ () -> Void in
+                    callback(CallbackStatus(rawValue: status))
                 })
             }
             
@@ -111,13 +111,13 @@ class ItunesConnectHandler {
     
     //MARK: - Public end point -
     
-    func getMetaWithCallback(callback:(status:CallbackStatus)->Void) -> Bool {
+    func getMetaWithCallback(_ callback:@escaping (_ status:CallbackStatus)->Void) -> Bool {
         
         if allCredentialValuesAreFilled() {
             
-            if fileManager.fileExistsAtPath(itmspPath()){
+            if fileManager.fileExists(atPath: itmspPath()){
                 do {
-                    try fileManager.removeItemAtPath(itmspPath())
+                    try fileManager.removeItem(atPath: itmspPath())
                 } catch {
                 }
             }
@@ -136,7 +136,7 @@ class ItunesConnectHandler {
         }
     }
     
-    func verifyScreenshots(callback:(status:CallbackStatus)->Void) -> Bool {
+    func verifyScreenshots(_ callback:@escaping (_ status:CallbackStatus)->Void) -> Bool {
         //    iTMSTransporter -m verify -u $ITMSUSER -p $ITMSPASS -vendor_id $ITMSSKU -f ~/Desktop/*.itmsp
         if allCredentialValuesAreFilled() {
             executeITCCommand([
@@ -153,7 +153,7 @@ class ItunesConnectHandler {
         }
     }
     
-    func uploadScreenshots(callback:(status:CallbackStatus)->Void) -> Bool {
+    func uploadScreenshots(_ callback:@escaping (_ status:CallbackStatus)->Void) -> Bool {
         //iTMSTransporter -m upload -u $ITMSUSER -p $ITMSPASS -vendor_id $ITMSSKU -f ~/Desktop/*.itmsp
         if allCredentialValuesAreFilled() {
             executeITCCommand([

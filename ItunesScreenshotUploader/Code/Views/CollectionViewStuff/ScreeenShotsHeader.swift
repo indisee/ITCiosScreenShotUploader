@@ -14,10 +14,10 @@ class ScreeenShotsHeader: NSView {
 
     @IBOutlet weak var headerLbl: NSTextField!
     
-    override func drawRect(dirtyRect: NSRect) {
-        NSColor.whiteColor().setFill()
+    override func draw(_ dirtyRect: NSRect) {
+        NSColor.white.setFill()
         NSRectFill(dirtyRect)
-        super.drawRect(dirtyRect)
+        super.draw(dirtyRect)
     }
     
 }
